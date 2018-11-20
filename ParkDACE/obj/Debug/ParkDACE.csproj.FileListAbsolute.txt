@@ -1,0 +1,12 @@
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\ParkDACE.exe.config
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\ParkDACE.exe
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\ParkDACE.pdb
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\ParkingSensorNodeDll.dll
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.csprojAssemblyReference.cache
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.Form1.resources
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.Properties.Resources.resources
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.csproj.GenerateResource.cache
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.csproj.CoreCompileInputs.cache
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.csproj.CopyComplete
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.exe
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.pdb
