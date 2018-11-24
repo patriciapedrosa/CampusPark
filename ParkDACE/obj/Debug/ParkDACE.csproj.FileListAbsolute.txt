@@ -10,3 +10,6 @@ C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.csproj.CoreC
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.csproj.CopyComplete
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.exe
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.pdb
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\BOT-SpotSensors.dll
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\BOT-SpotSensors.pdb
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\BOT-SpotSensors.dll.config

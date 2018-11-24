@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkDACE.ServiceParkingSpot;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +30,7 @@ namespace ParkDACE
             {
                 listBox1.Items.Add(str);
             });
-        }//
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -37,6 +38,14 @@ namespace ParkDACE
             dll = new ParkingSensorNodeDll.ParkingSensorNodeDll();
             dll.Initialize(NewSensorValueFunction, 1000);
             bw.RunWorkerAsync();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ServiceParkingSpot.ServiceParkingSpotClient servico = new ServiceParkingSpotClient();
+
+            listBox1.DataSource = servico.GetSpots();
+            listBox1.DisplayMember = "Name";
         }
     }
 }

@@ -1,0 +1,7 @@
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\bin\BOT-SpotSensors.dll.config
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\bin\BOT-SpotSensors.dll
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\bin\BOT-SpotSensors.pdb
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\obj\Debug\BOT-SpotSensors.csprojAssemblyReference.cache
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\obj\Debug\BOT-SpotSensors.csproj.CoreCompileInputs.cache
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\obj\Debug\BOT-SpotSensors.dll
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\obj\Debug\BOT-SpotSensors.pdb
