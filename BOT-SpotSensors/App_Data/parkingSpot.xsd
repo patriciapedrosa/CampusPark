@@ -51,6 +51,10 @@
               </xs:element>
             </xs:sequence>
           </xs:complexType>
+          <xs:unique name="unique-name">
+            <xs:selector xpath="parkingSpot"/>
+            <xs:field xpath="name"/>
+          </xs:unique>
         </xs:element>
       </xs:sequence>
     </xs:complexType>
