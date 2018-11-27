@@ -14,7 +14,6 @@ namespace SmartPark.Controllers
         protected static string CONNECTIONSTR =
             "Server=f0bd6467-8d2c-4782-aee0-a9a501091e04.sqlserver.sequelizer.com;Database=dbf0bd64678d2c4782aee0a9a501091e04;User ID=spjoenncymdyiakz;Password=J6ZRZ4Ex46AYiijuagUPuW7jPTnZxYVZFLYkDkAXe8MneQ6YtV7moRJU7PbgQNae;";
 
-        //[Route("api/spots")]
         public IEnumerable<Spot> Get()
         {
             List<Spot> spots = new List<Spot>();

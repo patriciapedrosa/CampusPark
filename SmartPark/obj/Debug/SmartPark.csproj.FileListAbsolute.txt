@@ -57,7 +57,6 @@ C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\bin\System.Net.Http.Fo
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\bin\System.Web.Http.xml
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\bin\System.Web.Http.WebHost.xml
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.csprojAssemblyReference.cache
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.csproj.CoreCompileInputs.cache
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.csproj.CopyComplete
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.dll
