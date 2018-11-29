@@ -61,3 +61,4 @@ C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.cs
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.csproj.CopyComplete
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.dll
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.pdb
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\SmartPark\obj\Debug\SmartPark.csprojAssemblyReference.cache
