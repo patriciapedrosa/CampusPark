@@ -72,7 +72,12 @@
     <Compile Include="IServiceParkingSpot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{96e0799f-5a52-4f32-a717-e8ff268d2d09}</Project>
+      <Name>Library</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App_Data\parkingSpot.xsd">
       <SubType>Designer</SubType>

@@ -1,62 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="parkingSpot"
-    targetNamespace="http://tempuri.org/parkingSpot.xsd"
-    elementFormDefault="qualified"
-    xmlns="http://tempuri.org/parkingSpot.xsd"
-    xmlns:mstns="http://tempuri.org/parkingSpot.xsd"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
->
-  <xs:element name="parkingSpots">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element name="parkingSpot" maxOccurs="10" minOccurs="10">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="id" type="xs:string" fixed="Campus_2_B_Park2">
-              </xs:element>
-              <xs:element name="name">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:pattern value="B-1|B-2|B-3|B-4|B-5|B-6|B-7|B-8|B-9|B-10"/>
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element type="xs:string" name="location"/>
-              <xs:element name="status">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="value">
-                      <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                          <xs:pattern value="Empty|Occupied"/>
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="timestamp">
-                      <xs:simpleType>
-                        <xs:restriction base="xs:dateTime">
-                          <xs:pattern value="Empty|Occupied"/>
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="batteryStatus">
-                <xs:simpleType>
-                  <xs:restriction base="xs:boolean">
-                    <xs:pattern value="0|1"/>
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-          <xs:unique name="unique-name">
-            <xs:selector xpath="parkingSpot"/>
-            <xs:field xpath="name"/>
-          </xs:unique>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="parkingSpots" type="parkingSpots">
+    <xs:unique name="unique-name">
+      <xs:selector xpath="parkingSpot"/>
+      <xs:field xpath="name"/>
+    </xs:unique>
   </xs:element>
+
+  <xs:complexType name="parkingSpots">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="parkingSpot" type="parkingSpot"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="parkingSpot">
+    <xs:sequence>
+      <xs:element name="id" fixed="Campus_2_B_Park2" type="xs:string" nillable="false" />
+      <xs:element name="name" nillable="false" type="nameSpot" />
+      <xs:element name="status-value" nillable="false" type="value" />
+      <xs:element name="status-timestamp" nillable="false" type="xs:dateTime" />
+      <xs:element name="batteryStatus" nillable="false" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="nameSpot">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="B-1|B-2|B-3|B-4|B-5|B-6|B-7|B-8|B-9|B-10" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="value">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="empty|occupied" />
+    </xs:restriction>
+  </xs:simpleType>
+ 
+          
+        
 </xs:schema>

@@ -16,28 +16,42 @@ namespace BOT_SpotSensors
 
         public List<Spot> GetSpots()
         {
-            XmlDocument doc = new XmlDocument();
             List<Spot> spots = new List<Spot>();
-            doc.Load(filePath);
-            XmlNodeList root = doc.SelectNodes("/parkingSpots/parkingSpot/status");
-            XmlNodeList r = doc.SelectNodes("/parkingSpots/parkingSpot");
-            foreach (XmlNode item in r)
-            {
-                Spot s = new Spot();
-                s.Id = item["id"].InnerText;
-                s.Name = item["name"].InnerText;
-                s.Battery = XmlConvert.ToBoolean(item["batteryStatus"].InnerText);
-                foreach (XmlNode i in root)
-                {
-                    s.Timestramp = DateTime.Parse(i["timestamp"].InnerText);
-                    s.Status = i["value"].InnerText;
-                }
+            string fileXml = AppDomain.CurrentDomain.BaseDirectory + @"\App_Data\parkingSpot.xml";
+            string fileXsd = AppDomain.CurrentDomain.BaseDirectory + @"\App_Data\parkingSpot.xsd";
 
-                spots.Add(s);
+            Library.HandlerXml myclass = new Library.HandlerXml(fileXml, fileXsd);
+            bool valid = myclass.ValidateXml();
+            if (valid)
+            {
+
+                XmlDocument doc = new XmlDocument();
+
+                doc.Load(filePath);
+                XmlNodeList r = doc.SelectNodes("/parkingSpots/parkingSpot");
+                foreach (XmlNode item in r)
+                {
+                    Spot s = new Spot();
+                    s.Id = item["id"].InnerText;
+                    s.Name = item["name"].InnerText;
+                    s.Battery = XmlConvert.ToBoolean(item["batteryStatus"].InnerText);
+
+                    s.Timestramp = DateTime.Parse(item["status-timestamp"].InnerText);
+                    s.Status = item["status-value"].InnerText;
+
+
+                    spots.Add(s);
+                }
+            }
+            else
+            {
+                throw new Exception("Message received from DLL does not respect schema rules. Message: '" + 
+                    "'" + myclass.ValidationMessage + Environment.NewLine);
             }
             
 
-            return spots;
+                 return spots;
+
         }
     }
 }

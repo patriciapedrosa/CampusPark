@@ -12,3 +12,6 @@ C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\BOT-SpotSensors\obj\Debug\BOT-Sp
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\BOT-SpotSensors\obj\Debug\BOT-SpotSensors.csproj.CoreCompileInputs.cache
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\BOT-SpotSensors\obj\Debug\BOT-SpotSensors.dll
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\BOT-SpotSensors\obj\Debug\BOT-SpotSensors.pdb
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\bin\Library.dll
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\bin\Library.pdb
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\BOT-SpotSensors\obj\Debug\BOT-SpotSensors.csproj.CopyComplete

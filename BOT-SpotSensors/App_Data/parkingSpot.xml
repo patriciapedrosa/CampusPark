@@ -3,101 +3,72 @@
   <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-1</name>
-    <location></location>
-    <status>
-        <value>empty</value>
-        <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+      <status-value>occupied</status-value>
+        <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>1</batteryStatus>
+  
   </parkingSpot>
   <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-2</name>
-    <location></location>
-    <status>
-      <value>empty</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+    <status-value>empty</status-value>
+    <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>0</batteryStatus>
   </parkingSpot>
   <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-3</name>
-    <location></location>
-    <status>
-      <value>empty</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+    <status-value>empty</status-value>
+    <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>0</batteryStatus>
   </parkingSpot>
 <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-4</name>
-    <location></location>
-    <status>
-      <value>empty</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+  <status-value>empty</status-value>
+  <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>0</batteryStatus>
   </parkingSpot>
 <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-5</name>
-    <location></location>
-    <status>
-      <value>empty</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+  <status-value>empty</status-value>
+  <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>0</batteryStatus>
   </parkingSpot>
 <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-6</name>
-    <location></location>
-    <status>
-      <value>empty</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+  <status-value>empty</status-value>
+  <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>1</batteryStatus>
   </parkingSpot>
 <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-7</name>
-    <location></location>
-    <status>
-      <value>occupied</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+  <status-value>empty</status-value>
+  <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>0</batteryStatus>
   </parkingSpot>
 <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-8</name>
-    <location></location>
-    <status>
-      <value>empty</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+  <status-value>empty</status-value>
+  <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>0</batteryStatus>
   </parkingSpot>
 <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-9</name>
-    <location></location>
-    <status>
-      <value>occupied</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+  <status-value>empty</status-value>
+  <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>0</batteryStatus>
   </parkingSpot>
 <parkingSpot>
     <id>Campus_2_B_Park2</id>
     <name>B-10</name>
-    <location></location>
-    <status>
-      <value>empty</value>
-      <timestamp>2018-10-23 21:30:00</timestamp>
-    </status>
+  <status-value>empty</status-value>
+  <status-timestamp>2018-10-23T21:30:00</status-timestamp>
     <batteryStatus>0</batteryStatus>
   </parkingSpot>
 </parkingSpots>
