@@ -14,17 +14,19 @@ namespace BOT_SpotSensors
     public interface IServiceParkingSpot
     {
         [OperationContract]
-        List<Spot> GetSpots();
+        List<ParkingSpot> GetSpots();
     }
 
 
     [DataContract]
-    public class Spot
+    public class ParkingSpot
     {
         [DataMember]
         public string Id { get; set; }
         [DataMember]
         public string Name { get; set; }
+        [DataMember]
+        public string Location { get; set; }
         [DataMember]
         public DateTime Timestramp { get; set; }
         [DataMember]
