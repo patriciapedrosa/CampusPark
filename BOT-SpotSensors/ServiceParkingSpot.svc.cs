@@ -12,11 +12,10 @@ namespace BOT_SpotSensors
    
     public class Service1 : IServiceParkingSpot
     {
-        string filePath = AppDomain.CurrentDomain.BaseDirectory.ToString() + @"App_Data\parkingSpot.xml";
 
-        public List<Spot> GetSpots()
+        public List<ParkingSpot> GetSpots()
         {
-            List<Spot> spots = new List<Spot>();
+            List<ParkingSpot> spots = new List<ParkingSpot>();
             string fileXml = AppDomain.CurrentDomain.BaseDirectory + @"\App_Data\parkingSpot.xml";
             string fileXsd = AppDomain.CurrentDomain.BaseDirectory + @"\App_Data\parkingSpot.xsd";
 
@@ -27,18 +26,17 @@ namespace BOT_SpotSensors
 
                 XmlDocument doc = new XmlDocument();
 
-                doc.Load(filePath);
+                doc.Load(fileXml);
                 XmlNodeList r = doc.SelectNodes("/parkingSpots/parkingSpot");
                 foreach (XmlNode item in r)
                 {
-                    Spot s = new Spot();
+                    ParkingSpot s = new ParkingSpot();
                     s.Id = item["id"].InnerText;
                     s.Name = item["name"].InnerText;
-                    s.Battery = XmlConvert.ToBoolean(item["batteryStatus"].InnerText);
-
-                    s.Timestramp = DateTime.Parse(item["status-timestamp"].InnerText);
+                    s.Location = item["location"].InnerText;
                     s.Status = item["status-value"].InnerText;
-
+                    s.Timestramp = DateTime.Parse(item["status-timestamp"].InnerText);
+                    s.Battery = XmlConvert.ToBoolean(item["batteryStatus"].InnerText);
 
                     spots.Add(s);
                 }

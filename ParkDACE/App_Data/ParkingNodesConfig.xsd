@@ -1,0 +1,35 @@
+﻿<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:element name="parkingLocation" type="parkingLocation">
+
+  </xs:element>
+
+  <xs:complexType name="parkingLocation">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="provider" type="provider"> </xs:element>
+    </xs:sequence>
+    <xs:attribute name="units" type="xs:string" use="required" />
+    <xs:attribute name="refreshRate" type="xs:integer" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="provider">
+    <xs:sequence>
+      <xs:element name="connectionType" type="xs:string" nillable="false" />
+      <xs:element name="endpoint" nillable="false" type="xs:string" />
+      <xs:element name="parkInfo"  type="parkInfo" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="parkInfo">
+    <xs:sequence>
+      <xs:element name="id" type="xs:string" nillable="false" />
+      <xs:element name="description" nillable="false" type="xs:string" />
+      <xs:element name="numberOfSpots"  type="xs:integer" nillable="false"/>
+      <xs:element name="operatingHours" type="xs:string" nillable="false"/>
+      <xs:element name="numberOfSpecialSpots" type="xs:integer" nillable="false"/>
+      <xs:element name="geoLocationFile" type="xs:string" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

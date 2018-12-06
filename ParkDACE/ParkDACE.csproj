@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="ParkingSensorNodeDll">
       <HintPath>..\ParkingSensorNodeDll.dll</HintPath>
     </Reference>
@@ -76,6 +79,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App_Data\Campus_2_A_Park1.xlsx" />
+    <None Include="App_Data\ParkingNodesConfig.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceParkingSpot\ParkDACE.ServiceParkingSpot.ParkingSpot.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceParkingSpot\Service1.wsdl" />
     <None Include="Connected Services\ServiceParkingSpot\ServiceParkingSpot.xsd">
       <SubType>Designer</SubType>
@@ -86,6 +96,7 @@
     <None Include="Connected Services\ServiceParkingSpot\ServiceParkingSpot2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\BOT_SpotSensors.Spot.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -101,9 +112,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BOT-SpotSensors\BOT-SpotSensors.csproj">
-      <Project>{96aaba4c-51c0-4719-be10-c963a4d5f60a}</Project>
-      <Name>BOT-SpotSensors</Name>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{96e0799f-5a52-4f32-a717-e8ff268d2d09}</Project>
+      <Name>Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +137,11 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\ParkingNodesConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,6 +19,7 @@
     <xs:sequence>
       <xs:element name="id" fixed="Campus_2_B_Park2" type="xs:string" nillable="false" />
       <xs:element name="name" nillable="false" type="nameSpot" />
+      <xs:element name="location" nillable="true" type="xs:string" />
       <xs:element name="status-value" nillable="false" type="value" />
       <xs:element name="status-timestamp" nillable="false" type="xs:dateTime" />
       <xs:element name="batteryStatus" nillable="false" type="xs:boolean" />

@@ -9,17 +9,144 @@
 //------------------------------------------------------------------------------
 
 namespace ParkDACE.ServiceParkingSpot {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ParkingSpot", Namespace="http://schemas.datacontract.org/2004/07/BOT_SpotSensors")]
+    [System.SerializableAttribute()]
+    public partial class ParkingSpot : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool BatteryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LocationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimestrampField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Battery {
+            get {
+                return this.BatteryField;
+            }
+            set {
+                if ((this.BatteryField.Equals(value) != true)) {
+                    this.BatteryField = value;
+                    this.RaisePropertyChanged("Battery");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Location {
+            get {
+                return this.LocationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LocationField, value) != true)) {
+                    this.LocationField = value;
+                    this.RaisePropertyChanged("Location");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Timestramp {
+            get {
+                return this.TimestrampField;
+            }
+            set {
+                if ((this.TimestrampField.Equals(value) != true)) {
+                    this.TimestrampField = value;
+                    this.RaisePropertyChanged("Timestramp");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceParkingSpot.IServiceParkingSpot")]
     public interface IServiceParkingSpot {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParkingSpot/GetSpots", ReplyAction="http://tempuri.org/IServiceParkingSpot/GetSpotsResponse")]
-        BOT_SpotSensors.Spot[] GetSpots();
+        ParkDACE.ServiceParkingSpot.ParkingSpot[] GetSpots();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParkingSpot/GetSpots", ReplyAction="http://tempuri.org/IServiceParkingSpot/GetSpotsResponse")]
-        System.Threading.Tasks.Task<BOT_SpotSensors.Spot[]> GetSpotsAsync();
+        System.Threading.Tasks.Task<ParkDACE.ServiceParkingSpot.ParkingSpot[]> GetSpotsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,11 +176,11 @@ namespace ParkDACE.ServiceParkingSpot {
                 base(binding, remoteAddress) {
         }
         
-        public BOT_SpotSensors.Spot[] GetSpots() {
+        public ParkDACE.ServiceParkingSpot.ParkingSpot[] GetSpots() {
             return base.Channel.GetSpots();
         }
         
-        public System.Threading.Tasks.Task<BOT_SpotSensors.Spot[]> GetSpotsAsync() {
+        public System.Threading.Tasks.Task<ParkDACE.ServiceParkingSpot.ParkingSpot[]> GetSpotsAsync() {
             return base.Channel.GetSpotsAsync();
         }
     }
