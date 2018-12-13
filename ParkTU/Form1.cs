@@ -111,8 +111,51 @@ namespace ParkTU
                     richTextBoxMsgRcvd.AppendText($"{e.Topic}:{Encoding.UTF8.GetString(e.Message)}\n");
                 });
 
-            //if e.topic == spots
-            //mete para a 
+            
+            if (e.Topic == "spots")
+            {
+                string mensagem = Encoding.UTF8.GetString(e.Message);
+                Spot s = new Spot();
+
+                char delimiter = ';';
+                string[] elementos = mensagem.Split(delimiter);
+                if (elementos[0] == "Campus_2_B_Park2")
+                {
+                    s.Park_Id = "2";
+                }
+                else
+                {
+                    s.Park_Id = "1";
+                }
+                s.Id = elementos[1];
+                s.Location = elementos[2];
+                s.Status = elementos[3];
+                s.Time_Status = DateTime.Parse(elementos[4]);
+                s.Status_Battery = bool.Parse(elementos[5]);
+                InsertIntoSpot(s);
+            }
+            else if(e.Topic == "park")
+            {
+                string mensagem = Encoding.UTF8.GetString(e.Message);
+                Park p = new Park();
+
+                char delimiter = ';';
+                string[] elementos = mensagem.Split(delimiter);
+                
+                if (elementos[0] == "Campus_2_B_Park2")
+                {
+                    p.Id = "2";
+                }
+                else
+                {
+                    p.Id = "1";
+                }
+                p.Number_Spots = int.Parse(elementos[1]);
+                p.Operating_Hours = elementos[2];
+                p.Special_Spots = int.Parse(elementos[3]);
+                p.Description = elementos[4];
+                InsertIntoPark(p);
+            }
 
 
 
@@ -157,11 +200,21 @@ namespace ParkTU
 
         public static int InsertIntoPark(Park park)
         {
+            string name;
+            if (park.Id == "2"){
+                name = "Campus_2_B_Park2";
+            }
+            else
+            {
+                name = "Campus_2_A_Park1";
+            }
             return Insert(
-                "INSERT INTO Park VALUES (@Id, @Description, @Number_spots, @Operating_Hours, @Special_Spots)",
+                "INSERT INTO Park VALUES (@Id, @Name, @Description, @Number_spots, @Operating_Hours, @Special_Spots)",
                 new List<SqlParameter>
                 {
+
                     new SqlParameter("@Id", park.Id),
+                    new SqlParameter("@Name", name ),
                     new SqlParameter("@Description", park.Description),
                     new SqlParameter("@Number_spots", park.Number_Spots),
                     new SqlParameter("@Operating_Hours", park.Operating_Hours),
@@ -172,7 +225,7 @@ namespace ParkTU
         public static int InsertIntoSpot(Spot spot)
         {
             return Insert(
-                "INSERT INTO Spot VALUES ( @Id, @Location, @Status, @Time_Status, @Status_Battery, @Park_Id) ",
+                "INSERT INTO Spot VALUES ( @Id, @Location, @Status, @Time_Status, @Status_Battery) ",
                 new List<SqlParameter>
                 {
                     new SqlParameter("@Id", spot.Id),
@@ -180,7 +233,7 @@ namespace ParkTU
                     new SqlParameter("@Status", spot.Status),
                     new SqlParameter("@Time_Status", spot.Time_Status),
                     new SqlParameter("@Status_Battery", spot.Status_Battery),
-                    new SqlParameter("@Park_Id", spot.Park_Id)
+                    new SqlParameter("@Park_id", spot.Park_Id)
                 });
         }
     }
