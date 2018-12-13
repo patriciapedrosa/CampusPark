@@ -1,0 +1,6 @@
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkSS\bin\Debug\ParkSS.dll
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkSS\bin\Debug\ParkSS.pdb
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkSS\obj\Debug\ParkSS.csprojAssemblyReference.cache
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkSS\obj\Debug\ParkSS.csproj.CoreCompileInputs.cache
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkSS\obj\Debug\ParkSS.dll
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkSS\obj\Debug\ParkSS.pdb

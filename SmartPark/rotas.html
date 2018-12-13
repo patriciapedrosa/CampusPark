@@ -53,28 +53,28 @@
                 </tr>
 
                 <tr>
-                    <td>api/spots/getStatusSpotsSpecificParkGivenMoment/{Park_Id}/{Time_Status}</td>
-                    <td>Estado de todos os estacionamentos de um parque específico para um determinado momento (uma data) //É necessário enviar o parâmetro Park_Id e o Time_Status</td>
+                    <td>api/spots/idParkSpots/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>Estado de todos os estacionamentos de um parque específico para um determinado momento (uma data) //É necessário enviar o parâmetro Park_Id e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/estáemfalta</td>
-                    <td></td>
+                    <td>api/spots/id/{Park_Id:int}/startDate/{startData:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}/endDate/{endData:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>Lista de todos os estados dos estacionamentos de um parque específico para um determinado período de tempo //É necessário enviar o parâmetro Park_Id, e enviar o startdDate e o endDate no formato "yyyy-MM-ddTHH:mm:ss"</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/estáemfalta</td>
-                    <td></td>
+                    <td>api/spots/idParkSpotsFree/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>Lista de todos os estacionamentos de um parque específico que estão livres para um determinado momento (uma data) //É necessário enviar o parâmetro Park_Id e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/getParkId/{Park_Id}</td>
+                    <td>api/spots/parkId/{Park_Id:int}</td>
                     <td>Lista de todos os estacionamentos pertencentes a um parque específico //É necessário enviar o parâmetro Park_Id</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/estáemfalta</td>
-                    <td></td>
+                    <td>api/spots/nameSpot/{Name}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>Informação detalhada de um estacionamento específico para um determinado momento (data) //É necessário enviar o parâmetro Name e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
                 </tr>
 
                 <tr>
@@ -83,12 +83,12 @@
                 </tr>
 
                 <tr>
-                    <td>api/spots/sensorsToBeReplaced/{Park_Id}</td>
+                    <td>api/spots/sensorsToBeReplaced/{Park_Id:int}</td>
                     <td>Lista de todos os sensores de estacionamento de um parque específico que precisam de ser substítuidos //É necessário enviar o parâmetro Park_Id</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/occupancyRate/{Park_Id}</td>
+                    <td>api/spots/occupancyRate/{Park_Id:int}</td>
                     <td>Taxa de ocupação de um parque específico //É necessário enviar o parâmetro Park_Id</td>
                 </tr>
 

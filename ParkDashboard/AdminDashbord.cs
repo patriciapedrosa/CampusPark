@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http; //httpclient
 using SmartPark.Models;
+using System.Globalization;
 
 
 namespace ParkDashboard
@@ -47,45 +48,45 @@ namespace ParkDashboard
             {
                 textBoxParkID.Enabled = false;
                 textBoxSpotID.Enabled = false;
-                textBoxGivenMoment.Enabled = false;
-                textBoxStartDate.Enabled = false;
-                textBoxEndDate.Enabled = false;
+                dateTimePickerGivenMoment.Enabled = false;
+                dateTimePickerStartDate.Enabled = false;
+                dateTimePickerEndDate.Enabled = false;
             }
 
             if (comboBox1.SelectedIndex == 1 || comboBox1.SelectedIndex == 3 )
             {
                 textBoxParkID.Enabled = true;
                 textBoxSpotID.Enabled = false;
-                textBoxGivenMoment.Enabled = true;
-                textBoxStartDate.Enabled = false;
-                textBoxEndDate.Enabled = false;
+                dateTimePickerGivenMoment.Enabled = true;
+                dateTimePickerStartDate.Enabled = false;
+                dateTimePickerEndDate.Enabled = false;
             }
 
             if (comboBox1.SelectedIndex == 4 || comboBox1.SelectedIndex == 5 || comboBox1.SelectedIndex == 8 || comboBox1.SelectedIndex == 9)
             {
                 textBoxParkID.Enabled = true;
                 textBoxSpotID.Enabled = false;
-                textBoxGivenMoment.Enabled = false;
-                textBoxStartDate.Enabled = false;
-                textBoxEndDate.Enabled = false;
+                dateTimePickerGivenMoment.Enabled = false;
+                dateTimePickerStartDate.Enabled = false;
+                dateTimePickerEndDate.Enabled = false;
             }
 
             if (comboBox1.SelectedIndex == 2)
             {
                 textBoxParkID.Enabled = true;
                 textBoxSpotID.Enabled = false;
-                textBoxGivenMoment.Enabled = false;
-                textBoxStartDate.Enabled = true;
-                textBoxEndDate.Enabled = true;
+                dateTimePickerGivenMoment.Enabled = false;
+                dateTimePickerStartDate.Enabled = true;
+                dateTimePickerEndDate.Enabled = true;
             }
 
             if (comboBox1.SelectedIndex == 6)
             {
                 textBoxParkID.Enabled = false;
                 textBoxSpotID.Enabled = true;
-                textBoxGivenMoment.Enabled = true;
-                textBoxStartDate.Enabled = false;
-                textBoxEndDate.Enabled = false;
+                dateTimePickerGivenMoment.Enabled = true;
+                dateTimePickerStartDate.Enabled = false;
+                dateTimePickerEndDate.Enabled = false;
             }
 
         }
@@ -112,23 +113,57 @@ namespace ParkDashboard
             if (comboBox1.SelectedIndex == 1)
             {
                 //2. Status of all parking spots in a specific park for a given moment;
-                if (string.IsNullOrEmpty(textBoxParkID.Text) || string.IsNullOrEmpty(textBoxGivenMoment.Text))
+                if (string.IsNullOrEmpty(textBoxParkID.Text))
                 {
-                    if (string.IsNullOrEmpty(textBoxParkID.Text))
-                    {
-                        MessageBox.Show("Precisa de indicar um Park ID");
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("Precisa de indicar uma hora. Formato: hh:mm");
-                    }
+                    MessageBox.Show("Precisa de indicar um Park ID");
                 }
+
                 else
                 {
-                    //if(string.Format(textBoxGivenMoment.Text) != %h)
+                    aux_Park();
 
-                    
+                    int ID = Convert.ToInt32(textBoxParkID.Text);
+                    int i = 1; //se depois do foreach continuar a 1 quer dizer que o Park ID não existe
+                    foreach (Park p in parks)
+                    {
+                        i = verificarParkID(p, ID, i);
+                    }
+
+                    if (i == 0)
+                    {
+                        string str;
+                        //str = Convert.ToString(dateTimePickerGivenMoment);
+                        //DateTime data;
+                        //data = DateTime.ParseExact(str, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
+                        MessageBox.Show(dateTimePickerGivenMoment.Value.ToString());
+                        client = new HttpClient();
+                        client.BaseAddress = new Uri(baseURI);
+                        client.DefaultRequestHeaders.Accept.Clear();
+                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage response = client.GetAsync($"api/spots/getStatusSpotsSpecificParkGivenMoment/" + textBoxParkID.Text + "/" + dateTimePickerGivenMoment.CustomFormat).Result;
+                        response.EnsureSuccessStatusCode();
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                            //converter json to list<spots>
+                            spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                        }
+
+                        richTextBox.Clear();
+                        foreach (Spot item in spots)
+                        {
+                            richTextBox.AppendText(showSpot(item));
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Esse Park ID não existe! Insira outro");
+                    }
                 }
             }
 
@@ -468,7 +503,7 @@ namespace ParkDashboard
 
         private string showSpot(Spot p)
         {
-            return string.Format("{0} : {1} {2} {3} {4} {5}\n", p.Id, p.Location, p.Status, p.Time_Status.ToString(), p.Status_Battery.ToString(), p.Park_Id.ToString());
+            return string.Format("{0} : {1} {2} {3} {4} {5} {6}\n", p.Id.ToString(),p.Name, p.Location, p.Status, p.Time_Status.ToString(), p.Status_Battery.ToString(), p.Park_Id.ToString());
         }
     }
 }
