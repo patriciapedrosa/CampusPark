@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkTU\bin\Debug\ParkTU.exe.config
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkTU\bin\Debug\ParkTU.exe
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkTU\bin\Debug\ParkTU.pdb
@@ -17,3 +18,24 @@ C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkTU\obj\Debug\ParkTU.csproj.CoreCompi
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkTU\obj\Debug\ParkTU.csproj.CopyComplete
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkTU\obj\Debug\ParkTU.exe
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkTU\obj\Debug\ParkTU.pdb
+=======
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\ParkTU.exe.config
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\ParkTU.exe
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\ParkTU.pdb
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\Library.dll
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\M2Mqtt.Net.dll
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\ParkDACE.exe
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\ParkingSensorNodeDll.dll
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\Library.pdb
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\ParkDACE.pdb
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\ParkDACE.exe.config
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\bin\Debug\M2Mqtt.Net.pdb
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\obj\Debug\ParkTU.csprojAssemblyReference.cache
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\obj\Debug\ParkTU.Form1.resources
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\obj\Debug\ParkTU.Properties.Resources.resources
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\obj\Debug\ParkTU.csproj.GenerateResource.cache
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\obj\Debug\ParkTU.csproj.CoreCompileInputs.cache
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\obj\Debug\ParkTU.csproj.CopyComplete
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\obj\Debug\ParkTU.exe
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkTU\obj\Debug\ParkTU.pdb
+>>>>>>> master

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Rotas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="btn-group" role="group">
+            <a href="index.html" type="button" class="btn btn-default">Home</a>
+            <a href="rotas.html" type="button" class="btn btn-default">Rotas</a>
+            <a href="about.html" type="button" class="btn btn-default">Sobre</a>
+        </div>
+        <h1 class="text-center">Parks</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Rotas</th>
+                    <th>Descrição</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>api/parks</td>
+                    <td>Mostra todos os parques</td>
+                </tr>
+
+                <tr>
+                    <td>api/parks/{id}</td>
+                    <td>Informação detalhada de um parque específico //É necessário enviar o parâmetro id</td>
+                </tr>            
+
+            </tbody>
+        </table>
+        <hr />
+        <h1 class="text-center">Spots</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Rotas</th>
+                    <th>Descrição</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>api/spots</td>
+                    <td>Mostra todos os estacionamentos</td>
+                </tr>
+
+                <tr>
+                    <td>api/spots/idParkSpots/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>Estado de todos os estacionamentos de um parque específico para um determinado momento (uma data) //É necessário enviar o parâmetro Park_Id e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
+                </tr>
+
+                <tr>
+                    <td>api/spots/id/{Park_Id:int}/startDate/{startData:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}/endDate/{endData:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>Lista de todos os estados dos estacionamentos de um parque específico para um determinado período de tempo //É necessário enviar o parâmetro Park_Id, e enviar o startdDate e o endDate no formato "yyyy-MM-ddTHH:mm:ss"</td>
+                </tr>
+
+                <tr>
+                    <td>api/spots/idParkSpotsFree/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>Lista de todos os estacionamentos de um parque específico que estão livres para um determinado momento (uma data) //É necessário enviar o parâmetro Park_Id e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
+                </tr>
+
+                <tr>
+                    <td>api/spots/parkId/{Park_Id:int}</td>
+                    <td>Lista de todos os estacionamentos pertencentes a um parque específico //É necessário enviar o parâmetro Park_Id</td>
+                </tr>
+
+                <tr>
+                    <td>api/spots/nameSpot/{Name}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>Informação detalhada de um estacionamento específico para um determinado momento (data) //É necessário enviar o parâmetro Name e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
+                </tr>
+
+                <tr>
+                    <td>api/spots/sensorsToBeReplaced</td>
+                    <td>Lista de todos os sensores de estacionamento pertencentes à plataforma em geral que precisam de ser substituídos devido ao seu nível crítico de bateria</td>
+                </tr>
+
+                <tr>
+                    <td>api/spots/sensorsToBeReplaced/{Park_Id:int}</td>
+                    <td>Lista de todos os sensores de estacionamento de um parque específico que precisam de ser substítuidos //É necessário enviar o parâmetro Park_Id</td>
+                </tr>
+
+                <tr>
+                    <td>api/spots/occupancyRate/{Park_Id:int}</td>
+                    <td>Taxa de ocupação de um parque específico //É necessário enviar o parâmetro Park_Id</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <hr />
+    </div>
+</body>
+</html>

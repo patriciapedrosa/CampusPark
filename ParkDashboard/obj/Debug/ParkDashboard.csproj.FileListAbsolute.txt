@@ -14,10 +14,10 @@ C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\bin\Debug\System.W
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.csprojAssemblyReference.cache
-C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.Form1.resources
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.Properties.Resources.resources
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.csproj.GenerateResource.cache
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.csproj.CoreCompileInputs.cache
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.csproj.CopyComplete
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.exe
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.pdb
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDashboard\obj\Debug\ParkDashboard.AdminDashbord.resources
