@@ -20,6 +20,7 @@ namespace BOT_SpotSensors
             string fileXsd = AppDomain.CurrentDomain.BaseDirectory + @"\App_Data\parkingSpot.xsd";
 
             Library.HandlerXml myclass = new Library.HandlerXml(fileXml, fileXsd);
+        
             bool valid = myclass.ValidateXml();
             if (valid)
             {

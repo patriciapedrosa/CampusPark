@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
@@ -18,11 +20,10 @@ namespace ParkTU
     public partial class Form1 : Form
     {
 
-        
+        static string CONNECTIONSTR = "Server=f0bd6467-8d2c-4782-aee0-a9a501091e04.sqlserver.sequelizer.com;Database=dbf0bd64678d2c4782aee0a9a501091e04;User ID=spjoenncymdyiakz;Password=J6ZRZ4Ex46AYiijuagUPuW7jPTnZxYVZFLYkDkAXe8MneQ6YtV7moRJU7PbgQNae;";
         private MqttClient client;
-        private string[] topics = { "data" , "spots"};
+        private string[] topics = { "park" , "spots"};
         private Boolean serviceEnabled;
-        private Boolean ip;
 
         public Form1()
         {
@@ -64,7 +65,7 @@ namespace ParkTU
                 else
                 {
                     client = null;
-                    MessageBox.Show("Service 'Mosquitto Broker' unavailable!");
+                    MessageBox.Show("Service unavailable!");
                 }
             }
             catch (Exception e)
@@ -78,6 +79,7 @@ namespace ParkTU
         private Boolean Service_Connect()
         {
             try {
+                
                 client = new MqttClient(textBoxIP.Text);
                 client.Connect(Guid.NewGuid().ToString());
                 if (!client.IsConnected)
@@ -102,27 +104,84 @@ namespace ParkTU
 
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            if (e.Topic == "data")
-            {
-                
-            }
-            else if (e.Topic == "spots")
-            {
-                string msg = Encoding.UTF8.GetString(e.Message);
-                ServiceParkingSpotClient servico = new ServiceParkingSpotClient();
-                ParkingSpot[] spots = servico.GetSpots();
-                /*foreach (Spot spot in spots)
+
+                this.BeginInvoke((MethodInvoker)delegate
                 {
-                   
-                }*/
-            }
+                    //acesso a componentes visuais do form devem ser colocados aqui
+                    richTextBoxMsgRcvd.AppendText($"{e.Topic}:{Encoding.UTF8.GetString(e.Message)}\n");
+                });
+
+            //if e.topic == spots
+            //mete para a 
+
+
 
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (serviceEnabled)
+            {
                 Service_Disconect();
+            }
+        }
+
+        public static int Insert(string query, List<SqlParameter> sqlParameters)
+        {
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection(CONNECTIONSTR);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = query;
+                cmd.Parameters.AddRange(sqlParameters.ToArray());
+
+                int affectedRows = cmd.ExecuteNonQuery();
+                conn.Close();
+
+                return affectedRows;
+            }
+            catch (Exception e)
+            {
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                return 0;
+            }
+        }
+
+
+
+        public static int InsertIntoPark(Park park)
+        {
+            return Insert(
+                "INSERT INTO Park VALUES (@Id, @Description, @Number_spots, @Operating_Hours, @Special_Spots)",
+                new List<SqlParameter>
+                {
+                    new SqlParameter("@Id", park.Id),
+                    new SqlParameter("@Description", park.Description),
+                    new SqlParameter("@Number_spots", park.Number_Spots),
+                    new SqlParameter("@Operating_Hours", park.Operating_Hours),
+                    new SqlParameter("@Special_Spots", park.Special_Spots)
+                });
+        }
+
+        public static int InsertIntoSpot(Spot spot)
+        {
+            return Insert(
+                "INSERT INTO Spot VALUES ( @Id, @Location, @Status, @Time_Status, @Status_Battery, @Park_Id) ",
+                new List<SqlParameter>
+                {
+                    new SqlParameter("@Id", spot.Id),
+                    new SqlParameter("@Location", spot.Location),
+                    new SqlParameter("@Status", spot.Status),
+                    new SqlParameter("@Time_Status", spot.Time_Status),
+                    new SqlParameter("@Status_Battery", spot.Status_Battery),
+                    new SqlParameter("@Park_Id", spot.Park_Id)
+                });
         }
     }
 }

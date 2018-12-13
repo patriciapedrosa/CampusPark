@@ -14,3 +14,4 @@ C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\Library.dll
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\Library.pdb
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\M2Mqtt.Net.dll
 C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\bin\Debug\M2Mqtt.Net.pdb
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\ParkDACE\obj\Debug\ParkDACE.csproj.ResolveComReference.cache

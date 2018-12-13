@@ -22,7 +22,7 @@
       <xs:element name="location" nillable="true" type="xs:string" />
       <xs:element name="status-value" nillable="false" type="value" />
       <xs:element name="status-timestamp" nillable="false" type="xs:dateTime" />
-      <xs:element name="batteryStatus" nillable="false" type="xs:boolean" />
+      <xs:element name="batteryStatus" nillable="false" type="battery" />
     </xs:sequence>
   </xs:complexType>
 
@@ -35,6 +35,12 @@
   <xs:simpleType name="value">
     <xs:restriction base="xs:string">
       <xs:pattern value="empty|occupied" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="battery">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="false|true" />
     </xs:restriction>
   </xs:simpleType>
  

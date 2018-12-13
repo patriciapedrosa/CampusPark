@@ -22,6 +22,7 @@ namespace Library
         }
 
         public string XmlFilePath { get; set; }
+        public string XmlData { get; set; }
         public string XsdFilePath { get; set; }
         public string ValidationMessage { get; set; }
         private bool isValid;

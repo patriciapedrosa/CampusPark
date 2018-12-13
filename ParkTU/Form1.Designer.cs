@@ -38,7 +38,7 @@
             // checkBoxService
             // 
             this.checkBoxService.AutoSize = true;
-            this.checkBoxService.Location = new System.Drawing.Point(31, 50);
+            this.checkBoxService.Location = new System.Drawing.Point(31, 61);
             this.checkBoxService.Name = "checkBoxService";
             this.checkBoxService.Size = new System.Drawing.Size(103, 17);
             this.checkBoxService.TabIndex = 0;
@@ -91,7 +91,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBoxService);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ParkTU";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
