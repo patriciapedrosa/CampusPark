@@ -225,15 +225,15 @@ namespace ParkTU
         public static int InsertIntoSpot(Spot spot)
         {
             return Insert(
-                "INSERT INTO Spot VALUES ( @Id, @Location, @Status, @Time_Status, @Status_Battery) ",
+                "INSERT INTO Spot VALUES ( @Name, @Location, @Time_Status, @Status, @Status_Battery, @Park_Id) ",
                 new List<SqlParameter>
                 {
-                    new SqlParameter("@Id", spot.Id),
+                    new SqlParameter("@Name", spot.Id),
                     new SqlParameter("@Location", spot.Location),
-                    new SqlParameter("@Status", spot.Status),
                     new SqlParameter("@Time_Status", spot.Time_Status),
+                    new SqlParameter("@Status", spot.Status),
                     new SqlParameter("@Status_Battery", spot.Status_Battery),
-                    new SqlParameter("@Park_id", spot.Park_Id)
+                    new SqlParameter("@Park_Id", spot.Park_Id)
                 });
         }
     }

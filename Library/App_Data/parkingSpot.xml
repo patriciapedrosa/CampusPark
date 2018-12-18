@@ -289,4 +289,139 @@
     <status-timestamp>12-12-2018 07:48</status-timestamp>
     <batteryStatus>True</batteryStatus>
   </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-1</name>
+    <location>
+    </location>
+    <status-value>occupied</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>False</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-2</name>
+    <location>
+    </location>
+    <status-value>occupied</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>False</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-3</name>
+    <location>
+    </location>
+    <status-value>empty</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>True</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-4</name>
+    <location>
+    </location>
+    <status-value>occupied</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>False</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-5</name>
+    <location>
+    </location>
+    <status-value>empty</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>False</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-6</name>
+    <location>
+    </location>
+    <status-value>empty</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>False</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-7</name>
+    <location>
+    </location>
+    <status-value>occupied</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>True</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-8</name>
+    <location>
+    </location>
+    <status-value>empty</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>True</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-9</name>
+    <location>
+    </location>
+    <status-value>empty</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>False</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-10</name>
+    <location>
+    </location>
+    <status-value>occupied</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>True</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-11</name>
+    <location>
+    </location>
+    <status-value>empty</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>True</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-12</name>
+    <location>
+    </location>
+    <status-value>empty</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>False</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-13</name>
+    <location>
+    </location>
+    <status-value>occupied</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>False</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-14</name>
+    <location>
+    </location>
+    <status-value>occupied</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>True</batteryStatus>
+  </parkingSpot>
+  <parkingSpot>
+    <id>Campus_2_A_Park1</id>
+    <name>A-15</name>
+    <location>
+    </location>
+    <status-value>empty</status-value>
+    <status-timestamp>18-12-2018 03:32</status-timestamp>
+    <batteryStatus>True</batteryStatus>
+  </parkingSpot>
 </parkingSpots>

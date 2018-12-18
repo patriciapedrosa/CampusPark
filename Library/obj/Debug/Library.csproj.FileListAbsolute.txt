@@ -8,3 +8,4 @@ C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\Library\bin\Debug\Library.pdb
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\Library\obj\Debug\Library.csproj.CoreCompileInputs.cache
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\Library\obj\Debug\Library.dll
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\Library\obj\Debug\Library.pdb
+C:\Users\Pat\Desktop\4ANO\IS\CampusPark\Library\obj\Debug\Library.csprojAssemblyReference.cache
