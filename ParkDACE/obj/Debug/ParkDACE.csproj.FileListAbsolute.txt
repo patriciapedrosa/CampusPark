@@ -34,3 +34,4 @@ C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDACE\obj\Debug\ParkDACE.cspr
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDACE\obj\Debug\ParkDACE.exe
 C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDACE\obj\Debug\ParkDACE.pdb
 >>>>>>> master
+C:\Users\tania\Documents\Faculdade\IS\ProjetoIS\ParkDACE\obj\Debug\ParkDACE.csproj.ResolveComReference.cache

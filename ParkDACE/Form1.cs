@@ -21,11 +21,11 @@ namespace ParkDACE
     public partial class Form1 : Form
     {
         //xml e xsd path
-        string fileXml = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "CampusPark/ParkDACE/App_Data/ParkingNodesConfig.xml");
-        string fileXsd = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "CampusPark/ParkDACE/App_Data/ParkingNodesConfig.xsd");
-        string xmlParkingspot = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "CampusPark/Library/App_Data/parkingSpot.xml");
+        string fileXml = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "ProjetoIS/ParkDACE/App_Data/ParkingNodesConfig.xml");
+        string fileXsd = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "ProjetoIS/ParkDACE/App_Data/ParkingNodesConfig.xsd");
+        string xmlParkingspot = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "ProjetoIS/Library/App_Data/parkingSpot.xml");
         //excel path
-        string fileExcel = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "CampusPark/ParkDACE/App_Data/");
+        string fileExcel = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "ProjetoIS/ParkDACE/App_Data/");
         //xml
         XmlDocument doc = new XmlDocument();
         //dll

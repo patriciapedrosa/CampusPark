@@ -15,7 +15,7 @@ namespace SmartPark.Controllers
         protected static string CONNECTIONSTR =
             "Server=f0bd6467-8d2c-4782-aee0-a9a501091e04.sqlserver.sequelizer.com;Database=dbf0bd64678d2c4782aee0a9a501091e04;User ID=spjoenncymdyiakz;Password=J6ZRZ4Ex46AYiijuagUPuW7jPTnZxYVZFLYkDkAXe8MneQ6YtV7moRJU7PbgQNae;";
 
-        // route: api/spots/
+        //api/spots/
         [Route("api/spots/")]
         public IHttpActionResult Get()
         {
@@ -24,7 +24,7 @@ namespace SmartPark.Controllers
             try 
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Spot", conn); // uso o sqlconnection conn e uso aquele comando sql
+                SqlCommand cmd = new SqlCommand("SELECT * FROM(SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot) a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -55,11 +55,12 @@ namespace SmartPark.Controllers
             return Ok(spots);
         }
 
-        //api/spots/idParkSpots/1/date/2018-12-23T21:30:00
-        [Route("api/spots/idParkSpots/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}")]
+        //api/spots/parks/1/date/2018-12-23T21:30:00
+        [Route("api/spots/parks/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}")]
         public IHttpActionResult GetStatusSpots_SpecificPark_GivenMoment(int Park_Id, DateTime Time_Status)
         {
             //2. Status of all parking spots in a specific park for a given moment;
+            //return Ok(Time_Status.ToString());
             List<Spot> spots = new List<Spot>();
             SqlConnection conn = new SqlConnection(CONNECTIONSTR);
             int cont = 0;
@@ -67,7 +68,9 @@ namespace SmartPark.Controllers
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Id DESC) rn FROM Spot WHERE Park_Id = '" + Park_Id + "' AND Time_Status <= '" + Time_Status + "') a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
+                SqlCommand cmd = new SqlCommand("SELECT * FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot WHERE Park_Id = @Park_Id AND Time_Status <= @Time_Status) a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
+                cmd.Parameters.AddWithValue("@Park_Id", Park_Id);
+                cmd.Parameters.AddWithValue("@Time_Status", Time_Status);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -94,24 +97,25 @@ namespace SmartPark.Controllers
                 reader.Close();
                 conn.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
                     conn.Close();
                 }
-                return NotFound();
+                //return NotFound();
+                return Ok(ex.ToString());
             }
 
             return Ok(spots);
         }
 
-        //api/spots/id/1/startDate/2018-10-23T21:20:00/endDate/2018-12-04T22:00:00
-        [Route("api/spots/id/{Park_Id:int}/startDate/{startData:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}/endDate/{endData:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}")]
-        public IHttpActionResult GetStatusSpots_SpecificPark_GivenPeriod(int Park_Id, DateTime startData, DateTime endData)
+        //api/spots/parks/1/startDate/2018-10-23T21:20:00/endDate/2018-12-04T22:00:00
+        [Route("api/spots/parks/{Park_Id:int}/startDate/{startDate:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}/endDate/{endDate:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}")]
+        public IHttpActionResult GetStatusSpots_SpecificPark_GivenPeriod(int Park_Id, DateTime startDate, DateTime endDate)
         {
             //3. List of status of all parking spots in a specific park for a given time period;
-            if (endData < startData)
+            if (endDate < startDate)
             {
                 return Ok("ERRO! A segunda data deve ser superior à primeira");
             }
@@ -124,7 +128,10 @@ namespace SmartPark.Controllers
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT* FROM(SELECT Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Id DESC) rn FROM Spot WHERE Park_Id = '" + Park_Id + "' AND Time_Status between '" + startData + "' AND '" + endData + "') a WHERE rn = 1 ", conn); // uso o sqlconnection conn e uso aquele comando sql
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM(SELECT Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot WHERE Park_Id = @Park_Id AND Time_Status between @startDate AND @endDate) a WHERE rn = 1 ", conn); // uso o sqlconnection conn e uso aquele comando sql
+                    cmd.Parameters.AddWithValue("@Park_Id", Park_Id);
+                    cmd.Parameters.AddWithValue("@startDate", startDate);
+                    cmd.Parameters.AddWithValue("@endDate", endDate);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -163,8 +170,8 @@ namespace SmartPark.Controllers
             }
         }
 
-        //api/spots/idParkSpotsFree/1/date/2018-12-23T21:30:00
-        [Route("api/spots/idParkSpotsFree/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}")]
+        //api/spots/parksFree/1/date/2018-12-23T21:30:00
+        [Route("api/spots/parksFree/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}")]
         public IHttpActionResult GetStatusSpotsFree_SpecificPark_GivenMoment(int Park_Id, DateTime Time_Status)
         {
             //4.List of free parking spots from a specific park for a given moment;
@@ -181,7 +188,9 @@ namespace SmartPark.Controllers
 
                 }
                 reader.Close();
-                SqlCommand cmd2 = new SqlCommand("SELECT * INTO Spot_aux FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id,  ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC) rn FROM Spot WHERE Park_Id = '" + Park_Id + "' AND Time_Status <= '" + Time_Status + "') a WHERE rn = 1; ", conn);
+                SqlCommand cmd2 = new SqlCommand("SELECT * INTO Spot_aux FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id,  ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot WHERE Park_Id = @Park_Id AND Time_Status <= @Time_Status) a WHERE rn = 1; ", conn);
+                cmd2.Parameters.AddWithValue("@Park_Id", Park_Id);
+                cmd2.Parameters.AddWithValue("@Time_Status", Time_Status);
                 SqlDataReader reader2 = cmd2.ExecuteReader();
                 while (reader2.Read())
                 {
@@ -225,8 +234,8 @@ namespace SmartPark.Controllers
             return Ok(spots);
         }
 
-        //api/spots/parkId/1
-        [Route("api/spots/parkId/{Park_Id:int}")]
+        //api/spots/parks/1
+        [Route("api/spots/parks/{Park_Id:int}")]
         public IHttpActionResult GetSpotsBelonging_SpecificPark(int Park_Id)
         {
             //5. List of parking spots belonging to a specific park; 
@@ -236,7 +245,8 @@ namespace SmartPark.Controllers
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Id DESC) rn FROM Spot WHERE Park_Id = '" + Park_Id + "') a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
+                SqlCommand cmd = new SqlCommand("SELECT * FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot WHERE Park_Id = @Park_Id) a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
+                cmd.Parameters.AddWithValue("@Park_Id", Park_Id);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -253,13 +263,14 @@ namespace SmartPark.Controllers
                     cont++;
                     spots.Add(p);
                 }
-                reader.Close();
-                conn.Close();
 
                 if (cont == 0)
                 {
                     return NotFound();
                 }
+
+                reader.Close();
+                conn.Close();
             }
             catch (Exception)
             {
@@ -273,8 +284,8 @@ namespace SmartPark.Controllers
             return Ok(spots);
         }
 
-        //api/spots/nameSpot/B-1/date/2018-12-23T21:30:00
-        [Route("api/spots/nameSpot/{Name}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}")]
+        //api/spots/B-1/date/2018-12-23T21:30:00
+        [Route("api/spots/{Name}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}")]
         public IHttpActionResult GetSpecificSpot_GivenMoment(string Name, DateTime Time_Status)
         {
             //7. Detailed information about a specific parking spot in a given moment (should also indicate if the spot is free or occupied);
@@ -285,7 +296,9 @@ namespace SmartPark.Controllers
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Id DESC) rn FROM Spot WHERE Name = '" + Name + "' AND Time_Status <= '" + Time_Status + "') a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
+                SqlCommand cmd = new SqlCommand("SELECT * FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot WHERE Name = @Name AND Time_Status <= @Time_Status) a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
+                cmd.Parameters.AddWithValue("@Name", Name);
+                cmd.Parameters.AddWithValue("@Time_Status", Time_Status);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -343,7 +356,7 @@ namespace SmartPark.Controllers
 
                 }
                 reader.Close();
-                SqlCommand cmd2 = new SqlCommand("SELECT * INTO Spot_aux FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id,  ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC) rn FROM Spot) a WHERE rn = 1; ", conn);
+                SqlCommand cmd2 = new SqlCommand("SELECT * INTO Spot_aux FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id,  ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot) a WHERE rn = 1; ", conn);
                 SqlDataReader reader2 = cmd2.ExecuteReader();
                 while (reader2.Read())
                 {
@@ -375,7 +388,7 @@ namespace SmartPark.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
@@ -406,7 +419,8 @@ namespace SmartPark.Controllers
 
                 }
                 reader.Close();
-                SqlCommand cmd2 = new SqlCommand("SELECT * INTO Spot_aux FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id,  ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC) rn FROM Spot WHERE Park_Id = '" + Park_Id + "') a WHERE rn = 1; ", conn);
+                SqlCommand cmd2 = new SqlCommand("SELECT * INTO Spot_aux FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id,  ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot WHERE Park_Id = @Park_Id) a WHERE rn = 1; ", conn);
+                cmd2.Parameters.AddWithValue("@Park_Id", Park_Id);
                 SqlDataReader reader2 = cmd2.ExecuteReader();
                 while (reader2.Read())
                 {
@@ -462,7 +476,8 @@ namespace SmartPark.Controllers
             {
                 conn.Open();
                 float spotsTotal = 0, spotsOccupied = 0;
-                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Id DESC) rn FROM Spot WHERE Park_Id = '" + Park_Id + "') a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id, ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot WHERE Park_Id = @Park_Id) a WHERE rn = 1", conn); // uso o sqlconnection conn e uso aquele comando sql
+                cmd.Parameters.AddWithValue("@Park_Id", Park_Id);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -478,7 +493,8 @@ namespace SmartPark.Controllers
 
                 }
                 reader1.Close();
-                SqlCommand cmd2 = new SqlCommand("SELECT * INTO Spot_aux FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id,  ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC) rn FROM Spot WHERE Park_Id = '" + Park_Id + "') a WHERE rn = 1; ", conn);
+                SqlCommand cmd2 = new SqlCommand("SELECT * INTO Spot_aux FROM (SELECT  Id, Name, Location, Time_Status, Status, Status_Battery, Park_Id,  ROW_NUMBER() OVER(PARTITION BY Name ORDER BY Time_Status DESC, Id DESC) rn FROM Spot WHERE Park_Id = @Park_Id) a WHERE rn = 1; ", conn);
+                cmd2.Parameters.AddWithValue("@Park_Id", Park_Id);
                 SqlDataReader reader2 = cmd2.ExecuteReader();
                 while (reader2.Read())
                 {
