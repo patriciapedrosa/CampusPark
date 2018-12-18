@@ -46,7 +46,6 @@
             // 
             // richTextBox
             // 
-            this.richTextBox.Enabled = false;
             this.richTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox.Location = new System.Drawing.Point(17, 204);
             this.richTextBox.Name = "richTextBox";
@@ -110,7 +109,6 @@
             this.textBoxSpotID.Name = "textBoxSpotID";
             this.textBoxSpotID.Size = new System.Drawing.Size(81, 22);
             this.textBoxSpotID.TabIndex = 10;
-            this.textBoxSpotID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxParkID_KeyPress);
             // 
             // labelSpotID
             // 
@@ -118,9 +116,9 @@
             this.labelSpotID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSpotID.Location = new System.Drawing.Point(120, 124);
             this.labelSpotID.Name = "labelSpotID";
-            this.labelSpotID.Size = new System.Drawing.Size(65, 20);
+            this.labelSpotID.Size = new System.Drawing.Size(92, 20);
             this.labelSpotID.TabIndex = 11;
-            this.labelSpotID.Text = "Spot ID";
+            this.labelSpotID.Text = "Spot Name";
             // 
             // labelGivenMoment
             // 
@@ -163,7 +161,7 @@
             // 
             // dateTimePickerGivenMoment
             // 
-            this.dateTimePickerGivenMoment.CustomFormat = "yyyy-MM-ddTHH:mm:ss";
+            this.dateTimePickerGivenMoment.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.dateTimePickerGivenMoment.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerGivenMoment.Location = new System.Drawing.Point(240, 145);
             this.dateTimePickerGivenMoment.Name = "dateTimePickerGivenMoment";

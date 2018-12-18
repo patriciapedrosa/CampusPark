@@ -16,11 +16,12 @@ namespace SmartPark.Controllers
 
         //route: api/parks/
         [Route("api/parks/")]
-        public IEnumerable<Park> Get()
+        public IHttpActionResult Get()
         {
             //1.List of available parks in the platform;
             List<Park> parks = new List<Park>();
             SqlConnection conn = new SqlConnection(CONNECTIONSTR);
+            int cont = 0;
             try
             {
                 conn.Open();
@@ -31,13 +32,21 @@ namespace SmartPark.Controllers
                     Park p = new Park
                     {
                         Id = (int)reader["Id"],
+                        Name = (string)reader["Name"],
                         Description = (string)reader["Description"],
                         Number_Spots = (int)reader["Number_Spots"],
-                        Operating_Hours = (DateTime)reader["Operating_Hours"],
+                        Operating_Hours = (string)reader["Operating_Hours"],
                         Special_Spots = (int)reader["Special_Spots"]
                     };
+                    cont++;
                     parks.Add(p);
                 }
+
+                if (cont == 0)
+                {
+                    return NotFound();
+                }
+
                 reader.Close();
                 conn.Close();
             }
@@ -47,36 +56,46 @@ namespace SmartPark.Controllers
                 {
                     conn.Close();
                 }
+                return NotFound();
             }
 
-            return parks;
+            return Ok(parks);
         }
 
         //route: api/parks/{Id}
-        [Route("api/parks/{Id}")]
-        public IEnumerable<Park> Get(int id)
+        [Route("api/parks/{Id:int}")]
+        public IHttpActionResult Get(int Id)
         {
             //6. Detailed information about a specific park;
             List<Park> parks = new List<Park>();
             SqlConnection conn = new SqlConnection(CONNECTIONSTR);
+            int cont = 0;
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Park Where Id=@id", conn); // uso o sqlconnection conn e uso aquele comando sql
-                cmd.Parameters.AddWithValue("@id", id);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Park Where Id=@Id", conn); // uso o sqlconnection conn e uso aquele comando sql
+                cmd.Parameters.AddWithValue("@Id", Id);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     Park p = new Park
                     {
                         Id = (int)reader["Id"],
+                        Name = (string)reader["Name"],
                         Description = (string)reader["Description"],
                         Number_Spots = (int)reader["Number_Spots"],
-                        Operating_Hours = (DateTime)reader["Operating_Hours"],
+                        Operating_Hours = (string)reader["Operating_Hours"],
                         Special_Spots = (int)reader["Special_Spots"]
                     };
+                    cont++;
                     parks.Add(p);
                 }
+
+                if (cont == 0)
+                {
+                    return NotFound();
+                }
+
                 reader.Close();
                 conn.Close();
             }
@@ -86,9 +105,10 @@ namespace SmartPark.Controllers
                 {
                     conn.Close();
                 }
+                return NotFound();
             }
 
-            return parks;
+            return Ok(parks);
         }
     }
 }

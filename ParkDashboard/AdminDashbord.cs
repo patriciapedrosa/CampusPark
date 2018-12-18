@@ -115,7 +115,7 @@ namespace ParkDashboard
                 //2. Status of all parking spots in a specific park for a given moment;
                 if (string.IsNullOrEmpty(textBoxParkID.Text))
                 {
-                    MessageBox.Show("Precisa de indicar um Park ID");
+                    MessageBox.Show("ERRO: Precisa de indicar um Park ID");
                 }
 
                 else
@@ -131,38 +131,40 @@ namespace ParkDashboard
 
                     if (i == 0)
                     {
-                        string str;
-                        //str = Convert.ToString(dateTimePickerGivenMoment);
-                        //DateTime data;
-                        //data = DateTime.ParseExact(str, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
-                        MessageBox.Show(dateTimePickerGivenMoment.Value.ToString());
                         client = new HttpClient();
                         client.BaseAddress = new Uri(baseURI);
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        HttpResponseMessage response = client.GetAsync($"api/spots/getStatusSpotsSpecificParkGivenMoment/" + textBoxParkID.Text + "/" + dateTimePickerGivenMoment.CustomFormat).Result;
-                        response.EnsureSuccessStatusCode();
-
-                        if (response.IsSuccessStatusCode)
+                        HttpResponseMessage response = client.GetAsync($"api/spots/parks/" + textBoxParkID.Text + "/date/" + dateTimePickerGivenMoment.Value.ToString("yyyy-MM-ddTHH:mm:ss")).Result;
+                        if (response.StatusCode.ToString() == "NotFound")
                         {
-                            string jsonResponse = response.Content.ReadAsStringAsync().Result;
-                            //converter json to list<spots>
-                            spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                            MessageBox.Show("ERRO: Não existe informações referentes a essa data. Por favor insira outra!");
                         }
                         else
                         {
-                            MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
-                        }
+                            response.EnsureSuccessStatusCode();
 
-                        richTextBox.Clear();
-                        foreach (Spot item in spots)
-                        {
-                            richTextBox.AppendText(showSpot(item));
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                                //converter json to list<spots>
+                                spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                            }
+
+                            richTextBox.Clear();
+                            foreach (Spot item in spots)
+                            {
+                                richTextBox.AppendText(showSpot(item));
+                            }
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Esse Park ID não existe! Insira outro");
+                        MessageBox.Show("ERRO: Esse Park ID não existe! Insira outro");
                     }
                 }
             }
@@ -170,11 +172,126 @@ namespace ParkDashboard
             if (comboBox1.SelectedIndex == 2)
             {
                 //3.List of status of all parking spots in a specific park for a given time period;
+                if (string.IsNullOrEmpty(textBoxParkID.Text))
+                {
+                    MessageBox.Show("ERRO: Precisa de indicar um Park ID");
+                }
+
+                else
+                {
+                    if (dateTimePickerEndDate.Value <= dateTimePickerStartDate.Value)
+                    {
+                        MessageBox.Show("ERRO: A segunda data deve ser superior à primeira!");
+                    }
+                    else
+                    {
+                        aux_Park();
+
+                        int ID = Convert.ToInt32(textBoxParkID.Text);
+                        int i = 1; //se depois do foreach continuar a 1 quer dizer que o Park ID não existe
+                        foreach (Park p in parks)
+                        {
+                            i = verificarParkID(p, ID, i);
+                        }
+
+                        if (i == 0)
+                        {
+                            client = new HttpClient();
+                            client.BaseAddress = new Uri(baseURI);
+                            client.DefaultRequestHeaders.Accept.Clear();
+                            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                            HttpResponseMessage response = client.GetAsync($"api/spots/parks/" + textBoxParkID.Text + "/startDate/" + dateTimePickerStartDate.Value.ToString("yyyy-MM-ddTHH:mm:ss") + "/endDate/" + dateTimePickerEndDate.Value.ToString("yyyy-MM-ddTHH:mm:ss")).Result;
+                            if (response.StatusCode.ToString() == "NotFound")
+                            {
+                                MessageBox.Show("ERRO: Não existe informações referentes a esse período de tempo. Por favor insira outras datas!");
+                            }
+                            else
+                            {
+                                response.EnsureSuccessStatusCode();
+
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                                    //converter json to list<spots>
+                                    spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                                }
+
+                                richTextBox.Clear();
+                                foreach (Spot item in spots)
+                                {
+                                    richTextBox.AppendText(showSpot(item));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERRO: Esse Park ID não existe! Insira outro");
+                        }
+                    }
+                }
             }
 
             if (comboBox1.SelectedIndex == 3)
             {
                 //4. List of free parking spots from a specific park for a given moment;
+                if (string.IsNullOrEmpty(textBoxParkID.Text))
+                {
+                    MessageBox.Show("ERRO: Precisa de indicar um Park ID");
+                }
+
+                else
+                {
+                    aux_Park();
+
+                    int ID = Convert.ToInt32(textBoxParkID.Text);
+                    int i = 1; //se depois do foreach continuar a 1 quer dizer que o Park ID não existe
+                    foreach (Park p in parks)
+                    {
+                        i = verificarParkID(p, ID, i);
+                    }
+
+                    if (i == 0)
+                    {
+                        client = new HttpClient();
+                        client.BaseAddress = new Uri(baseURI);
+                        client.DefaultRequestHeaders.Accept.Clear();
+                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage response = client.GetAsync($"api/spots/parksFree/" + textBoxParkID.Text + "/date/" + dateTimePickerGivenMoment.Value.ToString("yyyy-MM-ddTHH:mm:ss")).Result;
+                        if (response.StatusCode.ToString() == "NotFound")
+                        {
+                            MessageBox.Show("ERRO: Não existem estacionamentos livres para o parque e/ou data indicados!");
+                        }
+                        else
+                        {
+                            response.EnsureSuccessStatusCode();
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                                //converter json to list<spots>
+                                spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                            }
+
+                            richTextBox.Clear();
+                            foreach (Spot item in spots)
+                            {
+                                richTextBox.AppendText(showSpot(item));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERRO: Esse Park ID não existe! Insira outro");
+                    }
+                }
             }
 
             if (comboBox1.SelectedIndex == 4)
@@ -182,7 +299,7 @@ namespace ParkDashboard
                 //5. List of parking spots belonging to a specific park;
                 if (string.IsNullOrEmpty(textBoxParkID.Text))
                 {
-                    MessageBox.Show("Precisa de indicar um Park ID");
+                    MessageBox.Show("ERRO: Precisa de indicar um Park ID");
                 }
                 else
                 {
@@ -201,7 +318,7 @@ namespace ParkDashboard
                         client.BaseAddress = new Uri(baseURI);
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        HttpResponseMessage response = client.GetAsync($"api/spots/getParkId/" + textBoxParkID.Text).Result;
+                        HttpResponseMessage response = client.GetAsync($"api/spots/parks/" + textBoxParkID.Text).Result;
                         response.EnsureSuccessStatusCode();
 
                         if (response.IsSuccessStatusCode)
@@ -223,7 +340,7 @@ namespace ParkDashboard
                     }
                     else
                     {
-                        MessageBox.Show("Esse Park ID não existe! Insira outro");
+                        MessageBox.Show("ERRO: Esse Park ID não existe! Insira outro");
                     }
                 }
             }
@@ -233,7 +350,7 @@ namespace ParkDashboard
                 //6. Detailed information about a specific park;
                 if (string.IsNullOrEmpty(textBoxParkID.Text))
                 {
-                    MessageBox.Show("Precisa de indicar um Park ID");
+                    MessageBox.Show("ERRO: Precisa de indicar um Park ID");
                 }
                 else
                 {
@@ -274,7 +391,7 @@ namespace ParkDashboard
                     }
                     else
                     {
-                        MessageBox.Show("Esse Park ID não existe! Insira outro");
+                        MessageBox.Show("ERRO: Esse Park ID não existe! Insira outro");
                     }
                 }
             }
@@ -282,6 +399,60 @@ namespace ParkDashboard
             if (comboBox1.SelectedIndex == 6)
             {
                 //7. Detailed information about a specific parking spot in a given moment;
+                if (string.IsNullOrEmpty(textBoxSpotID.Text))
+                {
+                    MessageBox.Show("ERRO: Precisa de indicar um Spot Name");
+                }
+
+                else
+                {
+                    aux_Spot();
+
+                    string name = textBoxSpotID.Text.ToString();
+                    int i = 1; //se depois do foreach continuar a 1 quer dizer que o Park ID não existe
+                    foreach (Spot p in spots)
+                    {
+                        i = verificarSpotID(p, name, i);
+                    }
+
+                    if (i == 0)
+                    {
+                        client = new HttpClient();
+                        client.BaseAddress = new Uri(baseURI);
+                        client.DefaultRequestHeaders.Accept.Clear();
+                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage response = client.GetAsync($"api/spots/" + textBoxSpotID.Text + "/date/" + dateTimePickerGivenMoment.Value.ToString("yyyy-MM-ddTHH:mm:ss")).Result;
+                        if (response.StatusCode.ToString() == "NotFound")
+                        {
+                            MessageBox.Show("ERRO: Não existe informações referentes a essa data. Por favor insira outra!");
+                        }
+                        else
+                        {
+                            response.EnsureSuccessStatusCode();
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                                //converter json to list<spots>
+                                spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                            }
+
+                            richTextBox.Clear();
+                            foreach (Spot item in spots)
+                            {
+                                richTextBox.AppendText(showSpot(item));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERRO: Esse Spot ID não existe! Insira outro");
+                    }
+                }
             }
 
             if (comboBox1.SelectedIndex == 7)
@@ -292,23 +463,30 @@ namespace ParkDashboard
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.GetAsync($"api/spots/sensorsToBeReplaced").Result;
-                response.EnsureSuccessStatusCode();
-
-                if (response.IsSuccessStatusCode)
+                if (response.StatusCode.ToString() == "NotFound")
                 {
-                    string jsonResponse = response.Content.ReadAsStringAsync().Result;
-                    //converter json to list<spots>
-                    spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                    richTextBox.AppendText("De momento nenhum sensor de estacionamento necessita de ser substítuido!");
                 }
                 else
                 {
-                    MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
-                }
+                    response.EnsureSuccessStatusCode();
 
-                richTextBox.Clear();
-                foreach (Spot item in spots)
-                {
-                    richTextBox.AppendText(showSpot(item));
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                        //converter json to list<spots>
+                        spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                    }
+
+                    richTextBox.Clear();
+                    foreach (Spot item in spots)
+                    {
+                        richTextBox.AppendText(showSpot(item));
+                    }
                 }
             }
 
@@ -317,7 +495,7 @@ namespace ParkDashboard
                 //9. List of parking spots sensors that need to be replaced for a specific park;
                 if (string.IsNullOrEmpty(textBoxParkID.Text))
                 {
-                    MessageBox.Show("Precisa de indicar um Park ID");
+                    MessageBox.Show("ERRO: Precisa de indicar um Park ID");
                 }
                 else
                 {
@@ -335,28 +513,35 @@ namespace ParkDashboard
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         HttpResponseMessage response = client.GetAsync($"api/spots/sensorsToBeReplaced/" + textBoxParkID.Text).Result;
-                        response.EnsureSuccessStatusCode();
-
-                        if (response.IsSuccessStatusCode)
+                        if (response.StatusCode.ToString() == "NotFound")
                         {
-                            string jsonResponse = response.Content.ReadAsStringAsync().Result;
-                            //converter json to list<spots>
-                            spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                            richTextBox.AppendText("De momento nenhum sensor de estacionamento desse parque necessita de ser substítuido!");
                         }
                         else
                         {
-                            MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
-                        }
+                            response.EnsureSuccessStatusCode();
 
-                        richTextBox.Clear();
-                        foreach (Spot item in spots)
-                        {
-                            richTextBox.AppendText(showSpot(item));
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                                //converter json to list<spots>
+                                spots = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Spot>>(jsonResponse);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                            }
+
+                            richTextBox.Clear();
+                            foreach (Spot item in spots)
+                            {
+                                richTextBox.AppendText(showSpot(item));
+                            }
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Esse Park ID não existe! Insira outro");
+                        MessageBox.Show("ERRO: Esse Park ID não existe! Insira outro");
                     }
                 }
             }
@@ -366,7 +551,7 @@ namespace ParkDashboard
                 //10. Instant occupancy rate in a specific park.
                 if (string.IsNullOrEmpty(textBoxParkID.Text))
                 {
-                    MessageBox.Show("Precisa de indicar um Park ID");
+                    MessageBox.Show("ERRO: Precisa de indicar um Park ID");
                 }
                 else
                 {
@@ -404,7 +589,7 @@ namespace ParkDashboard
                     }
                     else
                     {
-                        MessageBox.Show("Esse Park ID não existe! Insira outro");
+                        MessageBox.Show("ERRO: Esse Park ID não existe! Insira outro");
                     }
                 }
             }
@@ -414,6 +599,16 @@ namespace ParkDashboard
         {
 
             if (ID == p.Id)
+            {
+                aux = 0;
+            }
+            return aux;
+        }
+
+        private int verificarSpotID(Spot p, string name, int aux)
+        {
+
+            if (name == p.Name)
             {
                 aux = 0;
             }
@@ -437,7 +632,7 @@ namespace ParkDashboard
             }
             else
             {
-                MessageBox.Show("erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
             }
 
             richTextBox.Clear();
@@ -460,7 +655,7 @@ namespace ParkDashboard
             }
             else
             {
-                MessageBox.Show("erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
+                MessageBox.Show("Erro a chamar a api" + response.StatusCode + response.ReasonPhrase);
             }
 
             richTextBox.Clear();
@@ -497,7 +692,7 @@ namespace ParkDashboard
 
             {
                 e.Handled = true;
-                MessageBox.Show("Este campo aceita apenas caracteres numéricos.");
+                MessageBox.Show("ERRO: Este campo aceita apenas caracteres numéricos.");
             }
         }
 
@@ -505,5 +700,6 @@ namespace ParkDashboard
         {
             return string.Format("{0} : {1} {2} {3} {4} {5} {6}\n", p.Id.ToString(),p.Name, p.Location, p.Status, p.Time_Status.ToString(), p.Status_Battery.ToString(), p.Park_Id.ToString());
         }
+
     }
 }

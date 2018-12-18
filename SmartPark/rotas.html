@@ -20,6 +20,7 @@
                 <tr>
                     <th>Rotas</th>
                     <th>Descrição</th>
+                    <th>Exemplos</th>
 
                 </tr>
             </thead>
@@ -27,11 +28,13 @@
                 <tr>
                     <td>api/parks</td>
                     <td>Mostra todos os parques</td>
+                    <td>api/parks</td>
                 </tr>
 
                 <tr>
-                    <td>api/parks/{id}</td>
+                    <td>api/parks/{Id}</td>
                     <td>Informação detalhada de um parque específico //É necessário enviar o parâmetro id</td>
+                    <td>api/parks/1</td>
                 </tr>            
 
             </tbody>
@@ -43,6 +46,7 @@
                 <tr>
                     <th>Rotas</th>
                     <th>Descrição</th>
+                    <th>Exemplos</th>
 
                 </tr>
             </thead>
@@ -50,46 +54,55 @@
                 <tr>
                     <td>api/spots</td>
                     <td>Mostra todos os estacionamentos</td>
+                    <td>api/spots</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/idParkSpots/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>api/spots/parks/{Park_Id}/date/{Time_Status}</td>
                     <td>Estado de todos os estacionamentos de um parque específico para um determinado momento (uma data) //É necessário enviar o parâmetro Park_Id e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
+                    <td>api/spots/parks/1/date/2018-12-23T21:30:00</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/id/{Park_Id:int}/startDate/{startData:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}/endDate/{endData:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>api/spots/parks/{Park_Id}/startDate/{startDate}/endDate/{endDate}</td>
                     <td>Lista de todos os estados dos estacionamentos de um parque específico para um determinado período de tempo //É necessário enviar o parâmetro Park_Id, e enviar o startdDate e o endDate no formato "yyyy-MM-ddTHH:mm:ss"</td>
+                    <td>api/spots/parks/1/startDate/2018-10-23T21:20:00/endDate/2018-12-25T22:00:00</td>               
                 </tr>
 
                 <tr>
-                    <td>api/spots/idParkSpotsFree/{Park_Id:int}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>api/spots/parksFree/{Park_Id}/date/{Time_Status}</td>
                     <td>Lista de todos os estacionamentos de um parque específico que estão livres para um determinado momento (uma data) //É necessário enviar o parâmetro Park_Id e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
+                    <td>api/spots/parksFree/1/date/2018-12-23T21:30:00</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/parkId/{Park_Id:int}</td>
+                    <td>api/spots/parks/{Park_Id}</td>
                     <td>Lista de todos os estacionamentos pertencentes a um parque específico //É necessário enviar o parâmetro Park_Id</td>
+                    <td>api/spots/parks/1</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/nameSpot/{Name}/date/{Time_Status:datetime:regex(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})}</td>
+                    <td>api/spots/{Name}/date/{Time_Status}</td>
                     <td>Informação detalhada de um estacionamento específico para um determinado momento (data) //É necessário enviar o parâmetro Name e enviar o Time_Status no formato "yyyy-MM-ddTHH:mm:ss"</td>
+                    <td>api/spots/B-1/date/2018-12-23T21:30:00</td>
                 </tr>
 
                 <tr>
                     <td>api/spots/sensorsToBeReplaced</td>
                     <td>Lista de todos os sensores de estacionamento pertencentes à plataforma em geral que precisam de ser substituídos devido ao seu nível crítico de bateria</td>
+                    <td>api/spots/sensorsToBeReplaced</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/sensorsToBeReplaced/{Park_Id:int}</td>
+                    <td>api/spots/sensorsToBeReplaced/{Park_Id}</td>
                     <td>Lista de todos os sensores de estacionamento de um parque específico que precisam de ser substítuidos //É necessário enviar o parâmetro Park_Id</td>
+                    <td>api/spots/sensorsToBeReplaced/1</td>
                 </tr>
 
                 <tr>
-                    <td>api/spots/occupancyRate/{Park_Id:int}</td>
+                    <td>api/spots/occupancyRate/{Park_Id}</td>
                     <td>Taxa de ocupação de um parque específico //É necessário enviar o parâmetro Park_Id</td>
+                    <td>api/spots/occupancyRate/1</td>
                 </tr>
 
             </tbody>
